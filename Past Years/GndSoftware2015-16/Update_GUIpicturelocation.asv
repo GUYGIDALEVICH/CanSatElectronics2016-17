@@ -1,0 +1,11 @@
+function [] = Update_GUIpicturelocation(handles)
+%Updates file location box in main GUI
+%Notice I passed the handles object fro main GUI
+
+
+Picture_name = datestr(datetime); %Get date and time as a astring
+Picture_name = strrep(Picture_name, ':', '_'); %Replaces illegal characters in string
+Set(handles.Pic_Loc, 'String', Picture_name);
+
+end
+
