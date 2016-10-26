@@ -1,0 +1,8 @@
+void setupMag(){
+  
+}
+
+void callMag(){
+  
+}
+

@@ -1,0 +1,8 @@
+setupSD(){
+  
+}
+
+writeToSD(){
+  
+}
+
