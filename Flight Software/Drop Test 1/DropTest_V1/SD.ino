@@ -1,8 +1,12 @@
-setupSD(){
-  
+void setupSD(){
+//
+//  File myFile = SD.open("dataFile.txt");
+//
+//  }
 }
-
-writeToSD(){
-  
+//
+void writeToSD(){
+//     if (myFile) {
+//    myFile.print(datatosave);
 }
 
