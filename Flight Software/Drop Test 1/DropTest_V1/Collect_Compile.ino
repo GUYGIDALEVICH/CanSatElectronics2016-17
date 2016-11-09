@@ -7,4 +7,5 @@ data[1] = pressure;
 data[2]= mag;
 data[3]= alt;
 data[4]=rtc;
+
 }

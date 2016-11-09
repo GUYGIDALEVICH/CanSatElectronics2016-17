@@ -5,7 +5,7 @@
 
 Adafruit_HMC5883_Unified mag;
 
-void setupMag(){
+void setupMag(void){
   
   //Initialize the sensor
   if(!mag.begin()){
@@ -36,4 +36,6 @@ void callMag(){
   float headingDegrees = heading * 180/M_PI;
   Serial.println(headingDegrees);
 }
+
+
 
