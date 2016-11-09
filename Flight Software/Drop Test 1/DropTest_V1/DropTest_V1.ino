@@ -9,6 +9,8 @@ float TeleArray[11];
 void setup() {
   Serial.begin(19200);
 
+  int a = 2;
+  
   //Pressure Sensor Setup
   setupPressure();
   
