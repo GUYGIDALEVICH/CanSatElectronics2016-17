@@ -1,4 +1,5 @@
 //Libraries
+<<<<<<< HEAD
 
 //Definitions
 #define TeleTeamID  0;
@@ -12,6 +13,9 @@
 #define TeleHeading 8;
 #define TeleSoftwareState 9;
 #define TeleBonus 10;
+=======
+//hi
+>>>>>>> origin/master
 
 //GlobalVariables
 int packetCount = 1;
@@ -23,6 +27,7 @@ long teleTime = millis();
 void setup() {
   Serial.begin(19200);
 
+  int a = 2;
   
   //Pressure Sensor Setup
   setupPressure();
