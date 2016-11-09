@@ -10,7 +10,7 @@ void loop() {
 
 
 // potential switch function for GPS by: Sapi rSosnovsky
-Void gpsSwitch(int alt) {
+void gpsSwitch(int alt) {
   
   if (alt < 100){
   // some code to tell the gps to start working
