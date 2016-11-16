@@ -2,6 +2,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_HMC5883_U.h> */
 //libraries used for this sensor
+#define declinationAngle 0.17 // declination angle for Toronto only, needs to be adjusted for different locations.
 
 Adafruit_HMC5883_Unified mag;
 
@@ -15,13 +16,11 @@ void setupMag(void){
   
 }
 
-void callMag(){
+void callMagHeading(){
   sensors_event_t event;
   mag.getEvent(&event);
 
   float heading = atan2(event.magnetic.y, event.magnetic.x);
-  float declinationAngle = 0.17; // declination angle for Toronoto only. needs to be adjusted for accuracy.
-
   heading += declinationAngle;
 
   //Correction for heading
@@ -33,8 +32,20 @@ void callMag(){
   }
 
   //Convert heading to degrees
-  float headingDegrees = heading * 180/M_PI;
-  Serial.println(headingDegrees);
+  heading = heading * 180/M_PI;
+  Serial.println(heading); // change to store heading in the array that contains all info
+}
+
+void callMagDecline(){
+  sensors_event_t event;
+  mag.getEvent(&event);
+
+  float decline = atan2(event.magnetic.z, event.magnetic.x);
+
+  //Convert to degrees
+  decline = decline * 180/M_PI;
+  Serial.println(decline); //this is extra just for team knowledge so maybe just print to serial?
+  
 }
 
 
