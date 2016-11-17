@@ -33,6 +33,7 @@ void callMagHeading(){
 
   //Convert heading to degrees
   heading = heading * 180/M_PI;
+  TeleArray[TeleHeading] = heading;
   Serial.println(heading); // change to store heading in the array that contains all info
 }
 
