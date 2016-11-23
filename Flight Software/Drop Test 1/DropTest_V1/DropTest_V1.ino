@@ -13,13 +13,14 @@
 #define TeleHeading 8;
 #define TeleSoftwareState 9;
 #define TeleBonus 10;
+#define TeleDecline 11;
 =======
 //hi
 >>>>>>> origin/master
 
 //GlobalVariables
 int packetCount = 1;
-float TeleArray[11];
+float TeleArray[12];
 long teleTime = millis();
 
 

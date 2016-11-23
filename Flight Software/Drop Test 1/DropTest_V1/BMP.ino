@@ -12,14 +12,17 @@ void setupTempAndPressure(){
 }
 
 void callTemp(){
-  Serial.println(bmp.readTemperature());
+  TeleArray[TeleTemp] = bmp.readTemperature();
+  //Serial.println(bmp.readTemperature());
 }
 
 void callPressure(){
-  Serial.println(bmp.readPressure());
+  TeleArray[TelePressure] = bmp.readPressure();
+  //Serial.println(bmp.readPressure());
 }
 
 void callAlt(){
-  Serial.println(bmp.readAltitude());
+  TeleArray[TeleAltSensor] = bmp.readAltitude();
+  //Serial.println(bmp.readAltitude());
 }
 

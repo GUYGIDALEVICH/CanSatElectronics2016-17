@@ -34,7 +34,7 @@ void callMagHeading(){
   //Convert heading to degrees
   heading = heading * 180/M_PI;
   TeleArray[TeleHeading] = heading;
-  Serial.println(heading); // change to store heading in the array that contains all info
+  //Serial.println(heading); // change to store heading in the array that contains all info
 }
 
 void callMagDecline(){
@@ -45,7 +45,8 @@ void callMagDecline(){
 
   //Convert to degrees
   decline = decline * 180/M_PI;
-  Serial.println(decline); //this is extra just for team knowledge so maybe just print to serial?
+  TeleArray[TeleDecline] = decline;
+  //Serial.println(decline); //this is extra just for team knowledge so maybe just print to serial?
   
 }
 
