@@ -1,8 +1,9 @@
-setupRTC(){
+//Real Time Clock
+void setupRTC(){
   
 }
 
-callRTC(){
+void callRTC(){
   
 }
 

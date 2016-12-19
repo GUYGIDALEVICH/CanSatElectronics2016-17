@@ -1,9 +1,28 @@
 //Libraries
+<<<<<<< HEAD
 
+//Definitions
+#define TeleTeamID  0;
+#define TeleMissionTime 1;
+#define TelePacketCount 2;
+#define TeleAltSensor 3;
+#define TelePessure 4;
+#define TeleSpeed 5;
+#define TeleTemp 6;
+#define TeleVoltage 7;
+#define TeleHeading 8;
+#define TeleSoftwareState 9;
+#define TeleBonus 10;
+#define TeleDecline 11;
+=======
+//hi
+>>>>>>> origin/master
 
 //GlobalVariables
 int packetCount = 1;
-float TeleArray[11];
+float TeleArray[12];
+long teleTime = millis();
+
 
 
 void setup() {
@@ -37,7 +56,6 @@ void loop() {
   callRTC();
 
 
-  compileData();
 
   timeDelay();
 
