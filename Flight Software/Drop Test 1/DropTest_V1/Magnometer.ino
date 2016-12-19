@@ -37,7 +37,7 @@ void callMagHeading(){
   //Serial.println(heading); // change to store heading in the array that contains all info
 }
 
-void callMagDecline(){
+void callMagDecline(){   // function doesnt fully work yet
   sensors_event_t event;
   mag.getEvent(&event);
 
