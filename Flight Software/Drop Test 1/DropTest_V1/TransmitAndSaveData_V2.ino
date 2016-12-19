@@ -12,7 +12,7 @@ void receiveRadioData() {
 
 void printLegend() {
   //Prints the order of the data that we're transmitting
-  Serial.print("temp\n pressure\n magnometer\n altitude\n RTC");;
+  Serial.print("temp\n pressure\n magnometer\n altitude\n RTC");
   
 }
 
