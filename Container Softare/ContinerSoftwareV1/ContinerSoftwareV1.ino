@@ -1,20 +1,35 @@
 #include <SFE_BMP180.h>
 #include <Wire.h>
 
-SFE_BMP180 pressure; //Pressure object created
-double baseline;
+//Definitions
+#define TeleTeamID 0;
+#define TeleMissionTime 1;
+#define TelePacketCount 2;
+#define TeleAltitude 3;
+#define TeleTemperature 4;
+#define TeleVoltage 5;
+#define TeleSoftwareState 6;
+#define TelePressure 7;
+
+float TeleArray[8]; //all data will be stored in this array for transmission. 
+//SFE_BMP180 pressure; //Pressure object created
+double initialPressure;
 
 void setup() {
   // put your setup code here, to run once:
-    baseline = getPressure(); // Get baseline pressure initially
+  setupBMP();
+  setupRTC();
+  
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  // this should be where the altudude and other readings are taken and transmitted
+  // also looks for a recieved signal to deploy the glider
+ }
 
-}
-
-
+/* segregate funcions into seperate files like in the flight software 
 // potential switch function for GPS by: Sapi rSosnovsky
 void gpsSwitch(int alt) {
   
@@ -90,4 +105,4 @@ double getPressure(){
   }
   return p; //Returns pressure
 }
-
+*/

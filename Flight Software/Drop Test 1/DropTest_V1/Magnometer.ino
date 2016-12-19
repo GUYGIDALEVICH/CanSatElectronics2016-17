@@ -37,7 +37,7 @@ void callMagHeading(){
   //Serial.println(heading); // change to store heading in the array that contains all info
 }
 
-void callMagDecline(){   // function doesnt fully work yet
+/*void callMagDecline(){   // function doesnt fully work yet
   sensors_event_t event;
   mag.getEvent(&event);
 
@@ -48,7 +48,7 @@ void callMagDecline(){   // function doesnt fully work yet
   TeleArray[TeleDecline] = decline;
   //Serial.println(decline); //this is extra just for team knowledge so maybe just print to serial?
   
-}
+}*/
 
 
 
