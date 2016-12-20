@@ -1,5 +1,10 @@
 //Libraries
-<<<<<<< HEAD
+#include <SoftwareSerial.h>
+#include <Adafruit_BMP085.h>
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_HMC5883_U.h>
+
 
 //Definitions
 #define TeleTeamID  0;
@@ -14,41 +19,48 @@
 #define TeleSoftwareState 9;
 #define TeleBonus 10;
 #define TeleDecline 11;
-=======
-//hi
->>>>>>> origin/master
+#define TeleArrayLength 12;
+
+//Pin Declarations
+#define SS_Rx 3;
+#define SS_Tx 4;
+#define deployPin 7;
+
+#define TeamID 9999;
+
+//Constants
+#define declinationAngle 0.17 // declination angle for Toronto only, needs to be adjusted for different locations.
+
 
 //GlobalVariables
 int packetCount = 1;
-float TeleArray[12];
+float TeleArray[TeleArrayLength];
 long teleTime = millis();
 
+SoftwareSerial radio(SS_Rx, SS_Tx);
 
+Adafruit_BMP180 bmp;
+Adafruit_HMC5883_Unified mag;
 
 void setup() {
+  
   Serial.begin(19200);
+  radio.begin(19200);
 
-  int a = 2;
-  
-  //Pressure Sensor Setup
+  //Setup Sensors
   setupPressure();
-  
-  //Temperture Setup
   setupTemp();
-  
-  //SD Card Setup
   setupSD();
-  
-  //Magnometer Setup
   setupMag();
-
-  //RealTimeClock Setup
   setupRTC();
+
+  
 }
 
 
 void loop() {
 
+  //Update All telemetery
   callTemp();
   callPressure();
   callMag();

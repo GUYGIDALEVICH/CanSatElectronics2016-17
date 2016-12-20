@@ -1,11 +1,3 @@
-/* #include <Wire.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_HMC5883_U.h> */
-//libraries used for this sensor
-#define declinationAngle 0.17 // declination angle for Toronto only, needs to be adjusted for different locations.
-
-Adafruit_HMC5883_Unified mag;
-
 void setupMag(void){
   
   //Initialize the sensor
@@ -33,8 +25,9 @@ void callMagHeading(){
 
   //Convert heading to degrees
   heading = heading * 180/M_PI;
+  
   TeleArray[TeleHeading] = heading;
-  //Serial.println(heading); // change to store heading in the array that contains all info
+
 }
 
 /*void callMagDecline(){   // function doesnt fully work yet
@@ -46,7 +39,6 @@ void callMagHeading(){
   //Convert to degrees
   decline = decline * 180/M_PI;
   TeleArray[TeleDecline] = decline;
-  //Serial.println(decline); //this is extra just for team knowledge so maybe just print to serial?
   
 }*/
 
