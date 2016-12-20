@@ -4,7 +4,7 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_HMC5883_U.h>
-
+#include <SparkFunDS1307RTC.h>
 
 //Definitions
 #define TeleTeamID  0;
@@ -20,6 +20,8 @@
 #define TeleBonus 10;
 #define TeleDecline 11;
 #define TeleArrayLength 12;
+
+#define RtcMissionTimeReg 0x08
 
 //Pin Declarations
 #define SS_Rx 3;
@@ -46,6 +48,9 @@ void setup() {
   
   Serial.begin(19200);
   radio.begin(19200);
+
+  //Mission Setup
+  setupMissionTime();
 
   //Setup Sensors
   setupPressure();

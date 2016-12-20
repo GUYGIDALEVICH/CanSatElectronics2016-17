@@ -4,6 +4,7 @@ void setupSD(){
 //
 //  }
 }
+
 //
 void writeToSD(){
 //     if (myFile) {
