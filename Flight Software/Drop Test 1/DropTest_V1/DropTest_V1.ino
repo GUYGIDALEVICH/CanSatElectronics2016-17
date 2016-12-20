@@ -28,6 +28,7 @@
 #define SS_Tx 4;
 #define deployPin 7;
 
+#define RTC_ADDRESS 0x68;
 #define TeamID 9999;
 
 //Constants
