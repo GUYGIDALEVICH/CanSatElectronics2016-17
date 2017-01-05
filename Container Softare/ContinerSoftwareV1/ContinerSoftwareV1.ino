@@ -11,6 +11,10 @@
 #define TeleSoftwareState 6;
 #define TelePressure 7;
 
+//EEPROM Addresses
+#define eeMissionTime 0
+
+int missionTime;
 float TeleArray[8]; //all data will be stored in this array for transmission. 
 //SFE_BMP180 pressure; //Pressure object created
 double initialPressure;

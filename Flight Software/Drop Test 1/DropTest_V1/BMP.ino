@@ -1,8 +1,7 @@
-void setupTempAndPressure(){
+void setupBMP(){
  // Initialize sensor
  if(!bmp.begin()){
   Serial.println("Could not find BMP sensor");
-  while(1); 
  }
 }
 
