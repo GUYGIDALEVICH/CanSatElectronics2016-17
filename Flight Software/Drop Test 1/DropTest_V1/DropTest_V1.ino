@@ -29,7 +29,12 @@
 #define SS_Tx 4
 #define deployPin 7
 
+<<<<<<< HEAD
 #define TeamID 6082
+=======
+#define RTC_ADDRESS 0x68;
+#define TeamID 9999;
+>>>>>>> origin/master
 
 //Constants
 #define GLOBE_DEG -10
