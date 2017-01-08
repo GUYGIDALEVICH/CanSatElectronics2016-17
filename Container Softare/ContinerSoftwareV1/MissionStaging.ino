@@ -1,6 +1,6 @@
 void setupMissionTime(){
   int missionStartTime = rtc.second();
-  EEPROM.put(eeMissionTime, missionStartTime)
+  EEPROM.put(eeMissionTime, missionStartTime);
   
 }
 

@@ -1,4 +1,4 @@
-Adafruit_BMP180 bmp;
+Adafruit_BMP085 bmp;
 
 void setupBMP(){
   //initialize sensor
@@ -12,9 +12,6 @@ void callTemp(){
   TeleArray[TeleTemperature] = bmp.readTemperature();
 }
 
-void callPressure(){
-  TeleArray[TelePressure] = bmp.readPressure();
-}
 
 void callAlt(){
   TeleArray[TeleAltitude] = bmp.readAltitude();

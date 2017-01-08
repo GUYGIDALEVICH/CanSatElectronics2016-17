@@ -1,4 +1,3 @@
-#define deployPin 7; // <-- change this to whatever pin the wire burning the string will be connected to.
 
 void deloy(){
   digitalWrite(deployPin, HIGH);

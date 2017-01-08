@@ -1,11 +1,13 @@
 //Libraries
 #include <SoftwareSerial.h>
-#include <Adafruit_BMP085.h>
+#include <Adafruit_BMP085.h>u
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <HMC5883L.h>
 #include <SparkFunDS1307RTC.h>
 #include <SD.h>
+#include <Adafruit_VC0706.h>  //https://github.com/adafruit/Adafruit-VC0706-Serial-Camera-Library
+#include <SPI.h>              //Built-in
 
 //Definitions
 #define TeleTeamID  0
@@ -29,12 +31,12 @@
 #define SS_Tx 4
 #define deployPin 7
 
-<<<<<<< HEAD
+
 #define TeamID 6082
-=======
-#define RTC_ADDRESS 0x68;
-#define TeamID 9999;
->>>>>>> origin/master
+
+#define RTC_ADDRESS 0x68
+#define TeamID 6082
+
 
 //Constants
 #define GLOBE_DEG -10
@@ -46,11 +48,16 @@ int packetCount = 0;
 float TeleArray[TeleArrayLength];
 long teleTime = millis();
 char telemetryFile[16];
+char IMGfilename[13];
 
+//Software Serials
 SoftwareSerial radio(SS_Rx, SS_Tx);
+SoftwareSerial cameraconnection = SoftwareSerial(2, 3);
 
+//Sensor Definitions
 Adafruit_BMP085 bmp;
 HMC5883L compass;
+Adafruit_VC0706 cam = Adafruit_VC0706(&cameraconnection);
 
 void setup() {
   
@@ -58,19 +65,20 @@ void setup() {
   radio.begin(19200);
 
 
-  Serial.println("test1");
-  
+
   //Mission Setup
   //setupMissionTime();
 
   //Setup Sensors
+    Serial.println("1");
   setupBMP();
-  
-  setupSD();
+  Serial.println("1");
+ // setupSD();
   setupMag();
-  Serial.println("test2");
+    Serial.println("1");
   setupRTC();
-
+  Serial.println("1");
+  //setupCamera();
   
 }
 
@@ -78,7 +86,6 @@ void setup() {
 void loop() {
 
   //Update All telemetery
-  callTemp();
   callPressure();
   callMagHeading();
   callAlt();
@@ -87,15 +94,18 @@ void loop() {
   packetCount = packetCount + 1;
   TeleArray[TelePacketCount] = packetCount;
 
-  Serial.println("test3");
+
 
   timeDelay();
   teleTime = millis();
   
   transmitData_Serial();
   //writeTelemetryToSD();
-  
+
   receiveRadioData();
+
+  //takeSnap();
+  //storeImageToSD();
 
 }
 

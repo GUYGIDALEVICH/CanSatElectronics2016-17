@@ -1,22 +1,31 @@
 
 void transmitData() {
-//transmits data via serial & saves data to SD
+  Serial.print(TeamID);
+  Serial.print(',');
+  Serial.print("CONTAINER");
+  Serial.print(',');
+  
+  for (int telem = 1; telem < TeleArrayLength; telem++){
+    Serial.print(TeleArray[telem]);
+    Serial.print(',');
+  }
+
+  Serial.println();
+  
+
+teleTime = millis();
 }
 
 
-void receiveRadioData() {
+void receiveSerialData() {
 //Receive single char that was transmitted by ground station
 
 //If it is a certain char, ex '*', release the payload
 }
 
 
-void printLegend() {
-  //Prints the order of the data that we're transmitting
-  Serial.print("temp\n pressure\n magnometer\n altitude\n RTC");
-  
-}
+
 
 void timeDelay(){
-  delay(1000); //Waits for a second
+ while(millis() - teleTime < (long) 1000){}
 }

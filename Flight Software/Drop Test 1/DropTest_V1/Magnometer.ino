@@ -15,7 +15,7 @@ compass.setOffset(0, 0);
 void callMagHeading(){
 
   Vector norm = compass.readNormalize();
-  float heading = atan2(norm.YAxis, norm.XAxis);
+  float heading = atan2((double) norm.YAxis, (double) norm.XAxis);
   
   TeleArray[TeleHeading] = heading;
   float declinationAngle = (GLOBE_DEG + (GLOBE_MIN / 60.0)) / (180 / M_PI);
