@@ -2,7 +2,7 @@
 void setupRTC(){
   rtc.begin();
   //REMOVE THIS LINE LATER******************
-  rtc.setTime(0,0,0,0,0,0,0);
+  //rtc.setTime(0,0,0,0,0,0,0);
   //****************************************
 }
 

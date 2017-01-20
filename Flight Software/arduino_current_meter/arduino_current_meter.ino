@@ -1,5 +1,5 @@
 
-#define R 13.75
+#define R 10.7
 
 void setup() {
   // put your setup code here, to run once:
