@@ -30,7 +30,9 @@
 #define SS_Rx 3
 #define SS_Tx 4
 #define deployPin 7
-
+#define pitotPin A0
+#define powerPitot 9
+#define xBeeSleepPin 8
 
 #define TeamID 6082
 
@@ -61,7 +63,7 @@ Adafruit_VC0706 cam = Adafruit_VC0706(&cameraconnection);
 
 void setup() {
   
-  Serial.begin(19200);
+  Serial.begin(9600);
   radio.begin(19200);
 
 
@@ -72,13 +74,14 @@ void setup() {
   //Setup Sensors
     Serial.println("1");
   setupBMP();
-  Serial.println("1");
+
  // setupSD();
   setupMag();
-    Serial.println("1");
+
   setupRTC();
-  Serial.println("1");
+
   //setupCamera();
+  setupPitot();
   
 }
 
@@ -90,6 +93,7 @@ void loop() {
   callMagHeading();
   callAlt();
   callRTC();
+  pitotTube();
 
   packetCount = packetCount + 1;
   TeleArray[TelePacketCount] = packetCount;
@@ -102,7 +106,7 @@ void loop() {
   transmitData_Serial();
   //writeTelemetryToSD();
 
-  receiveRadioData();
+  //receiveRadioData();
 
   //takeSnap();
   //storeImageToSD();

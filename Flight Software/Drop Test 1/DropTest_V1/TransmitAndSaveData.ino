@@ -1,3 +1,5 @@
+
+
 void transmitData() {
  
 //transmits data via serial & saves data to SD
@@ -36,6 +38,8 @@ void transmitData_Serial() {
   
 
 teleTime = millis();
+
+sleepRadio();
 }
 
 void receiveRadioData() {
@@ -52,6 +56,10 @@ void receiveRadioData() {
 
 
 void timeDelay(){
+  //delay
+ while(millis() - teleTime < (long) 950){}
+ //wake xBee
+ wakeRadio();
  while(millis() - teleTime < (long) 1000){}
 }
 
