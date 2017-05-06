@@ -21,6 +21,9 @@
 #define TeleDeployed 7
 #define TeleArrayLength 8
 
+# define Latitude 0     // For the LocationArray
+# define Longitude 1
+
 //EEPROM Addresses
 #define eeMissionTime 0
 
@@ -31,6 +34,7 @@
 
 int missionTime;
 float TeleArray[8]; //all data will be stored in this array for transmission. 
+float LocationArray[2]; //this can be incorporated into TeleArray, left separate for now
 //SFE_BMP180 pressure; //Pressure object created
 double initialPressure;
 long teleTime = millis();
