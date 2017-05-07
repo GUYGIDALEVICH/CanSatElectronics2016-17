@@ -23,6 +23,8 @@ void callAlt(){
 
 void callInitialPressure(){
   initialPressure = event.pressure;
+  String ps = String(initialPressure);
+  //TODO: SD card function for BMP
    
 }
 
