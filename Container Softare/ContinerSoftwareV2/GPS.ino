@@ -6,12 +6,9 @@ void setupGPS()
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);   // 1 Hz update rate
 }
 
+//updates GPS data
 void callGPS()
 {
-      LocationArray[Latitude] = GPS.latitudeDegrees;
-      LocationArray[Longitude] = GPS.longitudeDegrees;
-      
-//      Serial.print(LocationArray[Latitude]);          Uncomment to see lat/long data in serial monitor (for testing)
-//      Serial.print(", ");                             
-//      Serial.println(GPS.longitudeDegrees,4);    
+      TeleArray[TeleLat] = GPS.latitudeDegrees;
+      TeleArray[TeleLong] = GPS.longitudeDegrees;
 }
