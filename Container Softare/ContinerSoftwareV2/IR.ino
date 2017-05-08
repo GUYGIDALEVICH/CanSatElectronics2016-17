@@ -1,19 +1,12 @@
+//TODO make the library for this stupid sensor
 void setupIR(){
-  pinMode(irPin,INPUT);
-   
+  
 }
-
-boolean deployed(){
-   int dist = sharp.distance();
-    
-    if (dist > 30){
-      return true;
-    } else{
-      return false;
-    }
-}
-
 void callIR(){
-  TeleArray[TeleDeployed] = deployed();
+  
+}
+bool triggeredOrNah(){
+  bool var = false;
+  return ;
 }
 

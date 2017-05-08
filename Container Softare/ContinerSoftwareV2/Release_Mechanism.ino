@@ -1,6 +1,8 @@
-
-void deloy(){
-  digitalWrite(deployPin, HIGH);
-  //delay(100);  //<-- find out how long it takes for the wire to burn through
-  //digitalWrite(deployPin, LOW); //<-- turns off the wire
+void deploy(){
+  pinMode(7, OUTPUT);
+  if(trigger){
+    digitalWrite(7, HIGH);
+  }else{
+    digitalWrite(7,LOW);
+  }
 }
