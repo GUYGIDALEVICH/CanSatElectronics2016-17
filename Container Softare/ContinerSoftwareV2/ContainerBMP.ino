@@ -4,23 +4,18 @@ void setupBMP(){
     Serial.println("Could not find BMP sensor");
     while(1);
   }
-  //Get new sensor event
-  sensors_event_t event;
   bmp.getEvent(&event);
   //Checks if sensor can actually get pressure (if not then it doesnt work)
   if(event.pressure){
     Serial.println("BMP OK");
-  }else{
-    Serial.println("Sensor ERROR");
-    failed = true;
   }
   
 }
 
 //Get temperature
 void callTemp(){
-    bmp.getTemperature(&temperature);
-    TeleArray[TeleTemperature] = temperature;
+    bmp.getTemperature(&temp);
+    TeleArray[TeleTemperature] = temp;
 }
 
 //Gets current altitude
@@ -30,18 +25,12 @@ void callAlt(){
 }
 
 //Gets initial pressure
-void callInitialPressure(){
+void callInitialPressureAndAltitude(){
   initialPressure = event.pressure;
-  String ps = String(initialPressure);
-  createFile("initial pressure.txt");
-  writeToSD(ps, "initial pressure.txt");  
+  initialAltitude = bmp.pressureToAltitude(initialPressure, event.pressure); 
+  writeToSD(initialPressure, "initial pressure.txt");  
+  writeToSD(initialAltitude, "initial alt.txt");  
 }
 
-//Gets initial altitude
-void callInitialAltitude(){
-  initialAltitude = bmp.pressureToAltitude(initialPressure, event.pressure); 
-  createFile("initial alt.txt");
-  writeToSD(String(initialAltitude), "initial alt.txt");  
-}
 
 

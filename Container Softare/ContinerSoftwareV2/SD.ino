@@ -9,15 +9,10 @@ void setupSD(){
 }
 
 //Writes any string data to SD card
-void writeToSD(String dataString, String FileName){
+void writeToSD(double data, String FileName){
   File file;
-  if(SD.exists(FileName)){
-    file = SD.open(FileName, FILE_WRITE);
-  }else{
-    Serial.println("No such file found");
-    return;
-  }
-  file.println(dataString);
+  file = SD.open(FileName, FILE_WRITE);
+  file.println(data);
   file.close();
 }
 
@@ -25,33 +20,16 @@ void writeToSD(String dataString, String FileName){
 String readData(String FileName){
     File file;
     String data;
-    if(SD.exists(FileName)){
-      file = SD.open(FileName, FILE_READ);
+    if(!SD.exists(FileName)){
+      file = SD.open(FileName, FILE_WRITE);
+      file.close();
     }
+    file = SD.open(FileName, FILE_READ);
     while (file.available()) {
       data = file.read();
     }
+    file.close();
     return data;
 }
 
-//Creates any file on SD Card
-void createFile(String FileName){
-  File newFile;
-  if(!SD.exists(FileName)){
-    newFile = SD.open(FileName, FILE_WRITE);
-  }else{
-    Serial.println("FILE ALREADY CREATED");
-    return;
-  }
-  newFile.close();
-}
-
-//Deletes any file on SD Card (Again a little bit unecessary so might be removed for more memory)(Could a command for this)
-void deleteFile(String FileName){
-  if(SD.exists(FileName)){
-    SD.remove(FileName);
-  }else{
-    Serial.println("Can't find file");
-  }
-}
 
