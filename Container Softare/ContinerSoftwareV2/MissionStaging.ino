@@ -17,15 +17,16 @@ void callAll(){
  *These are all the states that the software will go through 
  */
 void boot(){
-  if(readData(sState).toInt()!=0)
+  if(readData(sState).toInt()!=0){
     softwareState = readData(sState).toInt();
     packetCount = readData(pack).toInt();
     missionTime = readData(nTime).toInt();
-  if(softwareState == 1){
+  }else{
      setupBMP();
      setupRTC();
      setupGPS();
      setupSD();
+     softwareState = 2;
   }
 }
 
