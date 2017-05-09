@@ -1,7 +1,7 @@
 void setupMissionTime(){
   DateTime now = rtc.now();
   int missionStartTime = now.second();
-  writeToSD(missionStartTime, "Mission Time.txt");
+  writeToSD(missionStartTime, mTime);
 }
 
 
@@ -17,12 +17,10 @@ void callAll(){
  *These are all the states that the software will go through 
  */
 void boot(){
-  if(readData("State.txt").toInt()!=NULL||readData("State.txt").toInt()!=0)
-    softwareState = readData("State.txt").toInt();
-  if(readData("Packet.txt").toInt()!=NULL||readData("State.txt").toInt()!=0)
-    packetCount = readData("Packet.txt").toInt();
-  if(readData("State.txt").toInt()!=NULL)
-    missionTime = readData("Time.txt").toInt();
+  if(readData(sState).toInt()!=0)
+    softwareState = readData(sState).toInt();
+    packetCount = readData(pack).toInt();
+    missionTime = readData(nTime).toInt();
   if(softwareState == 1){
      setupBMP();
      setupRTC();

@@ -5,8 +5,8 @@ void setupRTC(){
 }
 void callRTC(){
   DateTime now = rtc.now();
-  int seconds = now.second() + 60 * now.minute() + 60*60*now.hour() + 60*60*24*now.day();
-  writeToSD(seconds,"Time.txt");
+  long seconds = now.second() + 60 * now.minute() + 60*60*now.hour() + 60*60*24*now.day();
+  writeToSD(seconds,nTime);
   TeleArray[TeleTime] = (float) seconds;
 }
 

@@ -25,6 +25,15 @@
 
 #define TeamID 6082
 
+
+
+#define initPressure 'A'
+#define initAlt 'B'
+#define sState 'C'
+#define mTime 'D'
+#define nTime 'E'
+#define pack 'F'
+
 int8_t softwareState = 1;
 
 bool trigger = false; //Use this trigger for proper release mechanism and proper checking of time in stage 7
@@ -106,8 +115,8 @@ void loop() {
   
   packetCount = packetCount + 1;
   TeleArray[TelePacketCount] = packetCount;
-  writeToSD(packetCount,"Packet.txt");
-  writeToSD(softwareState,"Software State.txt");
+  writeToSD(packetCount,pack);
+  writeToSD(softwareState,sState);
   timeDelay();
   teleTime = millis();
 }

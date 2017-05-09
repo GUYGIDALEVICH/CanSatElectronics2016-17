@@ -9,22 +9,22 @@ void setupSD(){
 }
 
 //Writes any string data to SD card
-void writeToSD(double data, String FileName){
+void writeToSD(double data, char FileName){
   File file;
-  file = SD.open(FileName, FILE_WRITE);
+  file = SD.open(String(FileName), FILE_WRITE);
   file.println(data);
   file.close();
 }
 
 //Reads any data from any file on the SD card
-String readData(String FileName){
+String readData(char FileName){
     File file;
     String data;
-    if(!SD.exists(FileName)){
-      file = SD.open(FileName, FILE_WRITE);
+    if(!SD.exists(String(FileName))){
+      file = SD.open(String(FileName), FILE_WRITE);
       file.close();
     }
-    file = SD.open(FileName, FILE_READ);
+    file = SD.open(String(FileName), FILE_READ);
     while (file.available()) {
       data = file.read();
     }

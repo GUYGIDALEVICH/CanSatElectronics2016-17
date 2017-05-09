@@ -28,8 +28,8 @@ void callAlt(){
 void callInitialPressureAndAltitude(){
   initialPressure = event.pressure;
   initialAltitude = bmp.pressureToAltitude(initialPressure, event.pressure); 
-  writeToSD(initialPressure, "initial pressure.txt");  
-  writeToSD(initialAltitude, "initial alt.txt");  
+  writeToSD(initialPressure, initPressure);  
+  writeToSD(initialAltitude, initPressure);  
 }
 
 
