@@ -2,6 +2,7 @@ void initialize()  //Starts all the sensors
 {
   if (flightState == 1)
   {
+    Wire.begin();
     bmpBegin();
     compassBegin();
     RTCBegin();
@@ -11,7 +12,7 @@ void initialize()  //Starts all the sensors
   }
   else
   {
-  //Nothing happens
+    //Nothing happens
   }
   flightState = 2;
 }
@@ -27,8 +28,14 @@ void updateTelemetry()  //Just takes readings
 
 void boot()  //Checks eeprom for packet count, flight state and other variables if we have any.
 {
-  //Eeprom check and update all the saved internal telemetry data if needed
-  flightState = 3;
+  if (flightState != 3)
+  {
+    flightState = 3; //Need to add the read function. no idea how though
+  }
+  else
+  {
+
+  }
 }
 
 void dpwait()  //Keeps the arduino in a lower power state awaiting deployment
@@ -43,12 +50,13 @@ void descent()  //Collects the telemetry and transmits it every time its called.
   transmitXB();
   if (abs(telemetry[teleAlt]) <= 20)
   {
-    flightState = 5;
+    flightState = 4;
   }
 }
 
 void land()
 {
+  Serial.print("Final data sent. Buzzer turning on now");
   //Buzzer hahahaha
 }
 
