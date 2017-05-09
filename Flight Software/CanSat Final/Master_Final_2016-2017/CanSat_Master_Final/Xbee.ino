@@ -5,7 +5,7 @@ void radioBegin()
   Serial.println("Xbee Detected");
 }
 
-void printXB()
+void transmitXB()
 {
   Serial.print("Mission Time: ");
   Serial.print(telemetry[teleTime]);

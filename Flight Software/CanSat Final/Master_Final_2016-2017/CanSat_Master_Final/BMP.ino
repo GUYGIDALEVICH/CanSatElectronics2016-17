@@ -22,7 +22,7 @@ void callTemp()
     if (status != 0)
     {
       telemetry[teleTemp] = (float)T;
-     }
+    }
   }
 }
 void callBasePressure()

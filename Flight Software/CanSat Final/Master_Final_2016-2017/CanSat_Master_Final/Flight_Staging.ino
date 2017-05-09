@@ -1,36 +1,54 @@
-void UpdateStaging (){
-  #ifdef USE_EXTEEPROM
-  EEPROM.get(EEPROM_StageAdress, StageNumber);
-  #endif
-  
-  switch (StageNumber){
-      //.STAGE 1.Boot/Ascent stage:: Stage tasks: Do nothing
-    case(1):
-      if (pre>ReleaseAltitude && abs(pre-ReleaseAltitude)>AltitudeFilterOffset){
-        ++StageNumber;
-      }
-    break;
-
-    
-    //.STAGE 2. second Below 400m again ,Released stage
-    case(2): 
-      //Transition condition, If altitude ever exceeds release altitude
-      if (abs(pre) < GroundAproximationAltitude ){
-        ++StageNumber;
-      }
-    break;
-
-    // .STAGE 3. Landed stage
-    case(3): 
-      //No transition
-    break;
-    
-    default: 
-      StageNumber = 0;
-    break;
+void initialize()  //Starts all the sensors
+{
+  if (flightState == 1)
+  {
+    bmpBegin();
+    compassBegin();
+    RTCBegin();
+    radioBegin();
+    cameraBegin();
+    telemetry[teleCount] = count;
   }
-  #ifdef USE_EXTEEPROM
-  EEPROM.update(EEPROM_StageAdress, StageNumber); //Save stage back
-  #endif USE_EXTEEPROM
+  else
+  {
+  //Nothing happens
+  }
+  flightState = 2;
+}
+
+void updateTelemetry()  //Just takes readings
+{
+  callTemp();
+  callPressure();
+  callAlt();
+  getHeading();
+  getTime();
+}
+
+void boot()  //Checks eeprom for packet count, flight state and other variables if we have any.
+{
+  //Eeprom check and update all the saved internal telemetry data if needed
+  flightState = 3;
+}
+
+void dpwait()  //Keeps the arduino in a lower power state awaiting deployment
+{
+
+}
+
+void descent()  //Collects the telemetry and transmits it every time its called. also takes pictures. fun right?
+{
+  updateTelemetry();
+  takePicture();
+  transmitXB();
+  if (abs(telemetry[teleAlt]) <= 20)
+  {
+    flightState = 5;
+  }
+}
+
+void land()
+{
+  //Buzzer hahahaha
 }
 
