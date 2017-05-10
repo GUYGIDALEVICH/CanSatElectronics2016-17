@@ -45,6 +45,7 @@ float TeleArray[10]; //all data will be stored in this array for transmission.
 double initialPressure = 1013.25; //This is the sea level 'generic' value just in case we can't get an actual value
 double initialAltitude = 0; //Initial altitude temporarily set to 0
 
+int8_t packetCount = 0;
 
 float temp; 
 
@@ -53,9 +54,9 @@ long packetCount = 1;
 
 const int8_t chipSelect = 6; //This is the pin that connects to the chipselect of the SD card reader
 
-int currentAltitude; //Used to check current altitude
-int previousAltitude; //Used for comparison checks for certain stages
-int previousTime; //Used for comparison checks for certain stages
+double currentAltitude; //Used to check current altitude
+double previousAltitude; //Used for comparison checks for certain stages
+float previousTime; //Used for comparison checks for certain stages
 
 //Declare sensors
 SoftwareSerial gpsSer(3, 2);
@@ -101,14 +102,15 @@ void loop() {
     }
     deployment();
   }else if (softwareState == 7){
-    if(trigger == false){
-      previousTime = TeleArray[TeleTime];
-      trigger = true;
+    callAlt();
+    if(currentAltitude == preivousAltitude && packetCount != 10){
+      packetCount += 1;
+    }else if(currentAltitude == previousAltitude && packetCount == 10){
+      softwareState = 8;
+    }else{
+      packetCount = 0;
     }
-    if(TeleArray[TeleTime]-previousTime>=10){
-      softwareState == 8;
-      trigger = false;
-    }
+    previousAltitude = currentAltitude;
   }else{
     landed();
   }

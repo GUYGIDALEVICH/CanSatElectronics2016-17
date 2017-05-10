@@ -54,7 +54,7 @@ void writeDPin(){
 
 
 
-// dealys time
+// dealys time by one second
 void timeDelay(){
  while(millis() - teleTime < (long) 1000){}
 }
