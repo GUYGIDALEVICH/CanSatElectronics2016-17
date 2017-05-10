@@ -42,15 +42,15 @@ int missionTime; //Current mission time
 float TeleArray[10]; //all data will be stored in this array for transmission. 
 
 //SFE_BMP180 pressure; //Pressure object created
-double initialPressure = 1013.25; //This is the sea level 'generic' value just in case we can't get an actual value
-double initialAltitude = 0; //Initial altitude temporarily set to 0
+float initialPressure = 1013.25; //This is the sea level 'generic' value just in case we can't get an actual value
+float initialAltitude = 0; //Initial altitude temporarily set to 0
 
 int8_t packetCount = 0;
 
 float temp; 
 
 long teleTime = millis(); //Returns the number of milliseconds since the Arduino board began running the current program
-long packetCount = 1;
+int packetCounts = 1;
 
 const int8_t chipSelect = 6; //This is the pin that connects to the chipselect of the SD card reader
 
@@ -59,7 +59,7 @@ double previousAltitude; //Used for comparison checks for certain stages
 float previousTime; //Used for comparison checks for certain stages
 
 //Declare sensors
-SoftwareSerial gpsSer(3, 2);
+SoftwareSerial gpsSer(2,3);
 Adafruit_GPS GPS(&gpsSer);
 sensors_event_t event;
 Adafruit_BMP085_Unified bmp = Adafruit_BMP085_Unified(10085);
@@ -103,12 +103,12 @@ void loop() {
     deployment();
   }else if (softwareState == 7){
     callAlt();
-    if(currentAltitude == preivousAltitude && packetCount != 10){
+    if(currentAltitude == previousAltitude && packetCount != 10){
       packetCount += 1;
     }else if(currentAltitude == previousAltitude && packetCount == 10){
       softwareState = 8;
     }else{
-      packetCount = 0;
+      packetCounts = 0;
     }
     previousAltitude = currentAltitude;
   }else{
