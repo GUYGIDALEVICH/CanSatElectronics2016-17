@@ -28,6 +28,7 @@ void updateTelemetry()  //Just takes readings
 
 void boot()  //Checks eeprom for packet count, flight state and other variables if we have any.
 {
+  //Pulls data from EEPROM. Updates the value of packet count. Checks flightState and updates the one on storage.
   if (flightState != 3)
   {
     flightState = 3; //Need to add the read function. no idea how though
