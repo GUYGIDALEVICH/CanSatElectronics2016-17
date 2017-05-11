@@ -3,6 +3,7 @@ void setupGPS() {
   GPS.begin(9600);
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);  // Selects output type from GPS
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);   // 1 Hz update rate
+  Serial.println("GPS OK...");
 }
 
 //updates GPS data

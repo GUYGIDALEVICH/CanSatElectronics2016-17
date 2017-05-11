@@ -14,7 +14,6 @@ void transmitData() {
   }
 
   Serial.println();
-  teleTime = millis();
 }
 
 //The whole point of this is for the last stage in order to send GPS location on command so the whole point of this is just that it waits for that command to be sent
@@ -56,5 +55,8 @@ void writeDPin(){
 
 // dealys time by one second
 void timeDelay(){
- while(millis() - teleTime < (long) 1000){}
+  float tempSecs = totalSecondsElapsed;
+  while(totalSecondsElapsed - tempSecs <= 0){
+    callRTC();
+  }
 }

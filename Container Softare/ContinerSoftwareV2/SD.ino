@@ -9,7 +9,7 @@ void setupSD(){
 }
 
 //Writes any string data to SD card
-void writeToSD(double data, char FileName){
+void writeToSD(float data, char FileName){
   File file;
   file = SD.open(String(FileName), FILE_WRITE);
   file.println(data);

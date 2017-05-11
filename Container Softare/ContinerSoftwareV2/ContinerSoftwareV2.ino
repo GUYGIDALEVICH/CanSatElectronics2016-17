@@ -8,18 +8,18 @@
 #include <SoftwareSerial.h>
 #include <ir.h>
 
+
 //Definitions
 #define TeleTeamID 0
 #define TeleTime 1
 #define TelePacketCount 2
 #define TeleAltitude 3
 #define TeleTemperature 4
-#define TeleVoltage 5 
-#define TeleSoftwareState 6
-#define TeleDeployed 7
-#define TeleArrayLength 8
-#define TeleLong 9
-#define TeleLat 10
+#define TeleSoftwareState 5
+#define TeleDeployed 6
+#define TeleArrayLength 7
+#define TeleLong 8
+#define TeleLat 9
 
 #define deployPin 7 // <-- change this to whatever pin the wire burning the string will be connected to.
 
@@ -34,28 +34,28 @@
 #define nTime 'E'
 #define pack 'F'
 
-int8_t softwareState = 1;
+float softwareState = 1;
 
 bool trigger = false; //Use this trigger for proper release mechanism and proper checking of time in stage 7
 
-int missionTime; //Current mission time
 float TeleArray[10]; //all data will be stored in this array for transmission. 
 
 //SFE_BMP180 pressure; //Pressure object created
 float initialPressure = 1013.25; //This is the sea level 'generic' value just in case we can't get an actual value
 float initialAltitude = 0; //Initial altitude temporarily set to 0
+float initialTime;
+float totalSecondsElapsed;
 
-int8_t packetCount = 0;
+int packetCount = 0;
 
 float temp; 
 
-long teleTime = millis(); //Returns the number of milliseconds since the Arduino board began running the current program
 int packetCounts = 1;
 
 const int8_t chipSelect = 6; //This is the pin that connects to the chipselect of the SD card reader
 
-double currentAltitude; //Used to check current altitude
-double previousAltitude; //Used for comparison checks for certain stages
+float currentAltitude; //Used to check current altitude
+float previousAltitude; //Used for comparison checks for certain stages
 float previousTime; //Used for comparison checks for certain stages
 
 //Declare sensors
@@ -114,13 +114,14 @@ void loop() {
   }else{
     landed();
   }
-  
+  TeleArray[TeleTime] = totalSecondsElapsed;
   packetCount = packetCount + 1;
   TeleArray[TelePacketCount] = packetCount;
   writeToSD(packetCount,pack);
   writeToSD(softwareState,sState);
+  writeToSD(totalSecondsElapsed, mTime);
+  transmitData();
   timeDelay();
-  teleTime = millis();
 }
 
 

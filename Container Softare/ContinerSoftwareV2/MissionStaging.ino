@@ -17,10 +17,11 @@ void callAll(){
  *These are all the states that the software will go through 
  */
 void boot(){
-  if(readData(sState).toInt()!=0){
-    softwareState = readData(sState).toInt();
-    packetCount = readData(pack).toInt();
-    missionTime = readData(nTime).toInt();
+  int states = readData(sState).toFloat();
+  if(states != 0){
+    softwareState = int8_t(states);
+    packetCount = readData(pack).toFloat();
+    totalSecondsElapsed = readData(mTime).toFloat();
   }else{
      setupBMP();
      setupRTC();
