@@ -1,6 +1,6 @@
 void setupGPS() {
+  GPS.begin(19200);
   Serial.begin(19200);
-  GPS.begin(9600);
   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);  // Selects output type from GPS
   GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);   // 1 Hz update rate
   Serial.println("GPS OK...");
@@ -25,7 +25,7 @@ void callGPS() {
     Serial.print(GPS.latitudeDegrees, 6);      //
     Serial.print(", ");                        //
     Serial.println(GPS.longitudeDegrees, 6);   //
-    TeleArray[TeleLat] = GPS.latitudeDegrees;
-    TeleArray[TeleLong] = GPS.longitudeDegrees;
+    TeleArray[TeleLat] = float(GPS.latitudeDegrees);
+    TeleArray[TeleLong] = float(GPS.longitudeDegrees);
   }
 }

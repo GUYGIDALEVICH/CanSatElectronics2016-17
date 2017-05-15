@@ -59,22 +59,26 @@ float previousAltitude; //Used for comparison checks for certain stages
 float previousTime; //Used for comparison checks for certain stages
 
 //Declare sensors
-SoftwareSerial gpsSer(2,3);
+SoftwareSerial gpsSer(3,2);
 Adafruit_GPS GPS(&gpsSer);
 sensors_event_t event;
 Adafruit_BMP085_Unified bmp = Adafruit_BMP085_Unified(10085);
 RTC_DS3231 rtc;
-Ir ir(0);
 
 //Start off with first stage
 void setup() {
+  pinMode(7, OUTPUT);
+  pinMode(4, OUTPUT);
+  digitalWrite(7, LOW);
+  digitalWrite(4, LOW);
   Serial.begin(19200);
   boot();
+  timeDelay();
+  Serial.println("SETUP OKAY");
 }
 
 //Goes through each stage based on the transistion guidelines in CDR
 void loop() {
-
   if(softwareState == 2){
     initialize();
   }else if(softwareState == 3){
@@ -95,12 +99,10 @@ void loop() {
     }
   }else if (softwareState == 6){
     trigger = true;
-    if (ir.status()){
-      trigger = false;
-      softwareState = 7;
-      pDeploy();
-    }
     deployment();
+    if (trigger = false){
+      softwareState = 7;
+    }
   }else if (softwareState == 7){
     callAlt();
     if(currentAltitude == previousAltitude && packetCount != 10){
@@ -120,8 +122,8 @@ void loop() {
   writeToSD(packetCount,pack);
   writeToSD(softwareState,sState);
   writeToSD(totalSecondsElapsed, mTime);
-  transmitData();
-  timeDelay();
+  delay(1000);
+  //timeDelay();
 }
 
 

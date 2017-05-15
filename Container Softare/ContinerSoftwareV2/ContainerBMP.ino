@@ -1,8 +1,5 @@
 void setupBMP(){
-  //initialize sensor
-  if(!bmp.begin()){
-    Serial.println("Could not find BMP sensor");
-  }
+  bmp.begin();
   bmp.getEvent(&event);
   //Checks if sensor can actually get pressure (if not then it doesnt work)
   if(event.pressure){
@@ -15,7 +12,7 @@ void setupBMP(){
 //Get temperature
 void callTemp(){
     bmp.getTemperature(&temp);
-    TeleArray[TeleTemperature] = float(temp);
+    TeleArray[TeleTemperature] = temp;
 }
 
 //Gets current altitude

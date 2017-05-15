@@ -45,7 +45,7 @@ void receiveSerialData() {
 void writeDPin(){
   int pin;
   if(softwareState == 8){
-    pin = 13;
+    pin = 4;
     pinMode(pin, OUTPUT); // Set pin as an OUTPUT
     digitalWrite(pin, HIGH); // Write pin accordingly
   }
@@ -55,8 +55,6 @@ void writeDPin(){
 
 // dealys time by one second
 void timeDelay(){
-  float tempSecs = totalSecondsElapsed;
-  while(totalSecondsElapsed - tempSecs <= 0){
-    callRTC();
-  }
+  unsigned long tempSecs = millis();
+  while(millis()-tempSecs < 1000){}
 }
