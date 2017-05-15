@@ -1,0 +1,38 @@
+int sensorPin = A0;   
+int sensorValue = 0; 
+float Vout=0;
+float P=0;
+float Pa;
+void setup() {
+
+  // declare the ledPin as an OUTPUT:
+   Serial.begin(9600); 
+}
+
+void loop() {
+    int i=0;
+    int sum=0;
+    int offset=0;
+    Serial.println("init...");
+    for(i=0;i<10;i++)
+    {
+         sensorValue = analogRead(sensorPin)-512;
+         sum+=sensorValue;
+    }
+    offset=sum/10.0;
+    Serial.println("Ok");
+    while(1)
+    {
+       sensorValue = analogRead(sensorPin)-offset; 
+       Vout=(5*sensorValue)/1024.0;
+       P=Vout-2.5;  
+       Pa= -P*1000;         
+       Serial.print("Presure = " );                       
+       Serial.print(Pa); 
+       Serial.println("Pa");
+       Serial.println(" Velocity= ");
+       Serial.println(sqrt((2*Pa)/1.225));
+       Serial.println(" m/s");
+       delay(1000);   
+    }
+}
