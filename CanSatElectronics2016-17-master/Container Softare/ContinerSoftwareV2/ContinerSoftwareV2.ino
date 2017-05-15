@@ -124,7 +124,7 @@ void loop() {
       softwareState = sPOSTDEPLOYMENT;
     }
     
-  }else if (softwareState == SPOSTDEPLOYMENT){
+  }else if (softwareState == sPOSTDEPLOYMENT){
     callAlt();
     if(currentAltitude == previousAltitude && packetCount != 10){
       packetCount += 1;
@@ -143,9 +143,7 @@ void loop() {
   TeleArray[TeleTime] = totalSecondsElapsed;
   packetCount = packetCount + 1;
   TeleArray[TelePacketCount] = packetCount;
-  writeToSD(packetCount,pack);
-  writeToSD(softwareState,sState);
-  writeToSD(totalSecondsElapsed, mTime);
+  writeToSD(softwareState, 's');
   delay(1000);
   //timeDelay();
 }

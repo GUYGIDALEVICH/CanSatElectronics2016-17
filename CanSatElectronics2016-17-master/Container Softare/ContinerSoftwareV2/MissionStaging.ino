@@ -1,7 +1,6 @@
 void setupMissionTime(){
   DateTime now = rtc.now();
   int missionStartTime = now.second();
-  writeToSD(missionStartTime, mTime);
 }
 
 

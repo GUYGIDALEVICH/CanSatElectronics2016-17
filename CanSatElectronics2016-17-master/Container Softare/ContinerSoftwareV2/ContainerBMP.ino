@@ -27,8 +27,6 @@ void callInitialPressureAndAltitude(){
   bmp.getEvent(&event);
   initialPressure = event.pressure;
   initialAltitude = bmp.pressureToAltitude(initialPressure, event.pressure); 
-  writeToSD(initialPressure, initPressure);  
-  writeToSD(initialAltitude, initPressure);  
 }
 
 

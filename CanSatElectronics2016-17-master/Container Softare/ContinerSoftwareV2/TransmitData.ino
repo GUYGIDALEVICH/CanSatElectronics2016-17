@@ -11,6 +11,7 @@ void transmitData() {
   for (int telem = 1; telem < TeleArrayLength-2; telem++){
     Serial.print(TeleArray[telem]);
     Serial.print(',');
+    writeToSD('d', TeleArray[telem]);
   }
 
   Serial.println();
