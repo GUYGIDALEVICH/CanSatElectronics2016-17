@@ -2,7 +2,7 @@ void radioBegin()
 {
   //Setup
   Serial.begin(19200);
-  Serial.println("Xbee Detected");
+  Serial.println("Xbee Detected");//not really
 }
 
 void transmitXB()

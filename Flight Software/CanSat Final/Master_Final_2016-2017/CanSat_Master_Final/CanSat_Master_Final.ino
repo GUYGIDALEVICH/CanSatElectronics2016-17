@@ -20,7 +20,7 @@
 #define teleAlt 5
 #define teleCount 6
 #define EEPROM_ID 0x50
-#define EEPROM_LocationAddress 0
+//#define EEPROM_LocationAddress 0
 //#define releasePin 13   Rewire for the release pin
 
 //Other variables
@@ -29,10 +29,12 @@ double T, P, A;
 char status;
 const int dataSize = 7;
 int count = 0;
-int flightState = 1;
+float flightState = 1;
 long eeAddress_W = 0;
 //int altcounter = 0;
-
+int fsAddress = 4;
+int ctAddress = 52;
+ 
 //The array to be transmitted
 float telemetry[dataSize];
 
@@ -55,7 +57,7 @@ void loop() {
   {
     boot();
   }
-  else if (flightState == 0)
+  else if (flightState == 0) //This is basically useless
   {
     dpwait();
   }
@@ -70,20 +72,30 @@ void loop() {
   telemetry[teleCount] = telemetry[teleCount] + 1; //counter
 
   saveTelemetry() ;//saves data to the eeprom
-  delay(1000);
+  delay(1000);//Figure out a way to have a second delay without using the functino delay()
 }
 
 void saveTelemetry()
 {
 #ifdef USE_EXTEEPROM
-  float saveData[dataSize + 2];
+  float saveData[dataSize + 3];
   saveData[0] = TEAMID;
   saveData[1] = flightState;
+  // saveData[2] = P0;
   for (int i = 0; i < dataSize; i++)
   {
-    saveData[i + 2] = telemetry[i];
+    saveData[i + 3] = telemetry[i];
   }
-  extEEPROMWrite(saveData, dataSize + 2);
+  extEEPROMWrite(saveData, dataSize + 3);
 #endif
+}
+
+void updateTelemetry()  //Just takes readings
+{
+  callTemp();
+  callPressure();
+  callAlt();
+  getHeading();
+  getTime();
 }
 

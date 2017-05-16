@@ -5,37 +5,22 @@ void initialize()  //Starts all the sensors
     Wire.begin();
     bmpBegin();
     compassBegin();
-    RTCBegin();
+    RTCBegin(); //comment this out when the groundbutton is ready.
     radioBegin();
     cameraBegin();
     telemetry[teleCount] = count;
   }
-  else
-  {
-    //Nothing happens
-  }
   flightState = 2;
-}
-
-void updateTelemetry()  //Just takes readings
-{
-  callTemp();
-  callPressure();
-  callAlt();
-  getHeading();
-  getTime();
 }
 
 void boot()  //Checks eeprom for packet count, flight state and other variables if we have any.
 {
   //Pulls data from EEPROM. Updates the value of packet count. Checks flightState and updates the one on storage.
+  extEEPROMRead(fsAddress, &flightState);
   if (flightState != 3)
   {
-    flightState = 3; //Need to add the read function. no idea how though
-  }
-  else
-  {
-
+    extEEPROMRead(ctAddress, &telemetry[teleCount]);
+    flightState = 3; 
   }
 }
 

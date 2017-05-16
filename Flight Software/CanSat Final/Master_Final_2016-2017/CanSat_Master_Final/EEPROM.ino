@@ -16,23 +16,25 @@
 //                 Writing Float Arrays to EEPROM                    //
 ///////////////////////////////////////////////////////////////////////
 
-void extEEPROMRead(long numValues) {
-  float value;
-  long eeAddress_R = 0;
+
+void extEEPROMRead(int address, float *state ) {
+  //float value;
+  long eeAddress_R = address;
   //long numValues = 64000; //256000 / sizeof(float)
-  for (long i = 0; i < numValues; i++) {
+ // for (long i = 0; i < 4; i++) {
     if (eeAddress_R + sizeof(float) >= 256000) {
       eeAddress_R = 0;
     }
-    EEPROM_readAnything(eeAddress_R, value);
-    if (value == (float) - 888.0) {
-      Serial.print("\n");
-    } else {
-      Serial.print(value, DEC);
-      Serial.print(",");
-    }
-    eeAddress_R += sizeof(float);
-  }
+    EEPROM_readAnything(eeAddress_R, *state);
+//    if (value == (float) - 888.0) {
+//      Serial.print("\n");
+//    } else {
+//      Serial.print(value, DEC);
+//      Serial.print(",");
+//    }
+    
+   // eeAddress_R += sizeof(float);
+  //}
 }
 
 void extEEPROMWrite(float data[], int dataSize) {
@@ -43,10 +45,10 @@ void extEEPROMWrite(float data[], int dataSize) {
     EEPROM_writeAnything(eeAddress_W, data[i]);
     eeAddress_W += sizeof(float);
   }
-  EEPROM_writeAnything(eeAddress_W, (float) - 888.0);
-  eeAddress_W += sizeof(float);
+//  EEPROM_writeAnything(eeAddress_W, (float) - 888.0);
+//  eeAddress_W += sizeof(float);
   //Stores current ext EEPROM location in the internal eeprom
-  EEPROM.put(EEPROM_LocationAddress, eeAddress_W);
+  //EEPROM.put(EEPROM_LocationAddress, eeAddress_W);
 }
 
 ///////////////////////////////////////////////////////////////////////
