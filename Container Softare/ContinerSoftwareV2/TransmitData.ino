@@ -1,5 +1,7 @@
 //Transmits data through XBee
 void transmitData() {
+  File file;
+  file = SD.open("main", FILE_WRITE);
   if(Serial.available()){
     receiveSerialData();
   }
@@ -11,6 +13,8 @@ void transmitData() {
   for (int telem = 1; telem < TeleArrayLength-2; telem++){
     Serial.print(TeleArray[telem]);
     Serial.print(',');
+    file.write(TeleArray[telem]);
+    file.write(',');
   }
 
   Serial.println();

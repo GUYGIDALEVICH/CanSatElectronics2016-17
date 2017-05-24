@@ -119,9 +119,7 @@ void loop() {
   TeleArray[TeleTime] = totalSecondsElapsed;
   packetCount = packetCount + 1;
   TeleArray[TelePacketCount] = packetCount;
-  writeToSD(packetCount,pack);
   writeToSD(softwareState,sState);
-  writeToSD(totalSecondsElapsed, mTime);
   delay(1000);
   //timeDelay();
 }
